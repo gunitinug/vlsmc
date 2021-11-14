@@ -85,6 +85,8 @@ This sets the starting network block to 192.168.10.0/24 and the list of required
 |Sydney-KL|2|
 |Singapore-KL|2|
 
+And here's the output:
+
 ```
 $ ./vlsmc.sh -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sydney-KL,2:Sinpapore-KL,2'
 might take a few seconds...
