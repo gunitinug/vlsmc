@@ -68,4 +68,38 @@ Y                   : 165.23.215.128/30   : 2 hosts
 X                   : 165.23.215.132/30   : 2 hosts   
 ```
 
-2.
+## Second example
+Here's the command:
+
+`vlsmc.sh -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sydney-KL,2:Sinpapore-KL,2'`
+
+This sets the starting network block to 192.168.10.0/24 and the list of required subnets as:
+
+|Subnet ID|Required host size|
+|KL|28|
+|Perth|60|
+|Sydney|12|
+|Singapore|12|
+|Perth-KL|2|
+|Sydney-KL|2|
+|Singapore-KL|2|
+
+```
+$ ./vlsmc.sh -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sydney-KL,2:Sinpapore-KL,2'
+might take a few seconds...
+IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
+This is a learning project and not for professional use!
+This project uses my own algorithm which is not as efficient.
+Be patient!
+
+starting network
+192.168.10.0/24
+
+Perth               : 192.168.10.0/26     : 60 hosts       
+KL                  : 192.168.10.64/27    : 28 hosts       
+Singapore           : 192.168.10.96/28    : 12 hosts       
+Sydney              : 192.168.10.112/28   : 12 hosts       
+Sinpapore-KL        : 192.168.10.128/30   : 2 hosts        
+Sydney-KL           : 192.168.10.132/30   : 2 hosts        
+Perth-KL            : 192.168.10.136/30   : 2 hosts     
+```
