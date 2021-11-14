@@ -145,3 +145,18 @@ WAN3                : 192.168.1.100/30    : 2 hosts
 WAN2                : 192.168.1.104/30    : 2 hosts        
 WAN1                : 192.168.1.108/30    : 2 hosts 
 ```
+
+## Fourth example
+`vlsmc.sh -n 172.168.0.0/16 -l VLAN1,240:VLAN2,200:LAN1,150:LAN2,50:WAN1,2:WAN2,2`
+
+This sets the starting network block as 172.168.0.0/16 and the list of required subnets as:
+
+|Subnet ID|Required host size|
+|---|---|
+|VLAN1|240|
+|VLAN2|200|
+|LAN1|150|
+|LAN2|50|
+|WAN1|2|
+|WAN2|2|
+
