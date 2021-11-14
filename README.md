@@ -30,7 +30,7 @@ vlsmc -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sy
 ```
 -n sets the starting network block.
 
--l sets the list of required ID,SIZE pairs where ID. Each pair is separated by :.
+-l sets the list of required subnets: ID,SIZE pairs. Each pair is separated by :.
 
 # Demo
 
