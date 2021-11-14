@@ -9,6 +9,8 @@ I have devised an algorithm to implement this tool. Here's a diagram of the over
 
 ![](https://github.com/gunitinug/vlsmc/blob/main/vlsm%20diagram.png?raw=true)
 
+[I explain it more in the video](https://youtu.be/LJdqb05PZOE)
+
 Definitions:
 - FULL: if all subnets in current block are committed 
 - if ITEM: there is a subnet that remains to be committed
