@@ -9,6 +9,11 @@ I have devised an algorithm to implement this tool. Here's a diagram of the over
 
 ![](https://github.com/gunitinug/vlsmc/blob/main/vlsm%20diagram.png?raw=true)
 
+Definitions:
+- FULL: if all subnets in current block are committed 
+- if ITEM: there is a subnet that remains to be committed
+- DIVIDED: if a sub block is created at current index
+
 # Notes
 For a small CIDR like between 8 and 15, the script takes ages to produce output or hangs altogether. This is because of the efficiency of the algorithm used. Perhaps using bash to do this job is not suitable. Interacting with bash script and jq is relatively slow.
 
