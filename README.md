@@ -1,5 +1,6 @@
 # vlsmc
 A VLSM Calculator
+
 This is a VLSM calculator implemented in Bash.
 
 # Notes
