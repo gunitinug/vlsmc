@@ -32,6 +32,7 @@ vlsmc -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sy
 
 ## Command
 `vlsmc.sh -n 165.23.208.0/20 -l A,250:B,700:C,500:D,100:X,2:Y,2`
+
 This says: set starting network block to 165.23.208.0/20 and define the list of requirements as:
 |Subnet ID|Required host size|
 |---|---|
