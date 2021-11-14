@@ -21,6 +21,8 @@ For a small CIDR like between 8 and 15, the script takes ages to produce output 
 
 This script is, of course, to be run inside bash. You also need bc and jq.
 
+If you could help me fixing errors and to improve speed you are welcome.
+
 # Disclaimer
 This project is for learning purposes only. It should not be used for a serious usage. But I am committed to improving/fixing issues that remain.
 
