@@ -51,6 +51,7 @@ WAN3                : 10.0.3.236/30       : 2 hosts
 WAN2                : 10.0.3.240/30       : 2 hosts        
 WAN1                : 10.0.3.244/30       : 2 hosts 
 ```
+The subnets are identical to those of 10.0.0.0/8.
 
 # Disclaimer
 This project is for learning purposes only. It should not be used for a serious usage. But I am committed to improving/fixing issues that remain.
