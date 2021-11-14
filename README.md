@@ -160,3 +160,23 @@ This sets the starting network block as 172.168.0.0/16 and the list of required 
 |WAN1|2|
 |WAN2|2|
 
+And the output is:
+
+```
+$ ./vlsmc.sh -n 172.168.0.0/16 -l VLAN1,240:VLAN2,200:LAN1,150:LAN2,50:WAN1,2:WAN2,2
+might take a few seconds...
+IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
+This is a learning project and not for professional use!
+This project uses my own algorithm which is not as efficient.
+Be patient!
+
+starting network
+172.168.0.0/16
+
+VLAN1               : 172.168.0.0/24      : 240 hosts      
+VLAN2               : 172.168.1.0/24      : 200 hosts      
+LAN1                : 172.168.2.0/24      : 150 hosts      
+LAN2                : 172.168.3.0/26      : 50 hosts       
+WAN2                : 172.168.3.64/30     : 2 hosts        
+WAN1                : 172.168.3.68/30     : 2 hosts  
+```
