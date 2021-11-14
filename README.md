@@ -28,3 +28,25 @@ Usage: vlsmc [ -n NETWORK ] [ -l [ ID,SIZE[:ID,SIZE]... ] ]
 Example
 vlsmc -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sydney-KL,2:Sinpapore-KL,2'
 ```
+# Demo
+1.
+```
+logan@logan-mainPC:~/Documents/vlsm/vlsmc$ ./vlsmc.sh -n 165.23.208.0/20 -l A,250:B,700:C,500:D,100:X,2:Y,2
+might take a few seconds...
+IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
+This is a learning project and not for professional use!
+This project uses my own algorithm which is not as efficient.
+Be patient!
+
+starting network
+165.23.208.0/20
+
+B                   : 165.23.208.0/22     : 700 hosts      
+C                   : 165.23.212.0/23     : 500 hosts      
+A                   : 165.23.214.0/24     : 250 hosts      
+D                   : 165.23.215.0/25     : 100 hosts      
+Y                   : 165.23.215.128/30   : 2 hosts        
+X                   : 165.23.215.132/30   : 2 hosts   
+```
+
+2.
