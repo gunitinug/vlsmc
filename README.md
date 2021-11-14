@@ -6,6 +6,8 @@ This is a VLSM calculator implemented in Bash.
 # Notes
 For a small CIDR like between 8 and 15, the script takes ages to produce output or hangs altogether. This is because of the efficiency of the algorithm used. Perhaps using bash to do this job is not suitable. Interacting with bash script and jq is relatively slow.
 
+This script is, of course, to be run inside bash. You also need bc and jq.
+
 # Disclaimer
 This project is for learning purposes only. It should not be used for a serious usage. But I am committed to improving/fixing issues that remain.
 
