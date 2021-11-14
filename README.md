@@ -106,3 +106,42 @@ Sinpapore-KL        : 192.168.10.128/30   : 2 hosts
 Sydney-KL           : 192.168.10.132/30   : 2 hosts        
 Perth-KL            : 192.168.10.136/30   : 2 hosts     
 ```
+
+## Third example
+`vlsmc.sh -n 192.168.1.0/24 -l LAN1,29:LAN2,21:LAN3,12:LAN4,8:WAN1,2:WAN2,2:WAN3,2:WAN4,2`
+
+This sets the starting network block as 192.168.1.0/24 and the list of required subnets as:
+
+|Subnet ID|Required host size|
+|---|---|
+|LAN1|29|
+|LAN2|21|
+|LAN3|12|
+|LAN4|8|
+|WAN1|2|
+|WAN2|2|
+|WAN3|2|
+|WAN4|2|
+
+Here's the output:
+
+```
+$ ./vlsmc.sh -n 192.168.1.0/24 -l LAN1,29:LAN2,21:LAN3,12:LAN4,8:WAN1,2:WAN2,2:WAN3,2:WAN4,2
+might take a few seconds...
+IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
+This is a learning project and not for professional use!
+This project uses my own algorithm which is not as efficient.
+Be patient!
+
+starting network
+192.168.1.0/24
+
+LAN1                : 192.168.1.0/27      : 29 hosts       
+LAN2                : 192.168.1.32/27     : 21 hosts       
+LAN3                : 192.168.1.64/28     : 12 hosts       
+LAN4                : 192.168.1.80/28     : 8 hosts        
+WAN4                : 192.168.1.96/30     : 2 hosts        
+WAN3                : 192.168.1.100/30    : 2 hosts        
+WAN2                : 192.168.1.104/30    : 2 hosts        
+WAN1                : 192.168.1.108/30    : 2 hosts 
+```
