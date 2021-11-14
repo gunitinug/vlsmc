@@ -44,7 +44,9 @@ This says: set starting network block to 165.23.208.0/20 and define the list of 
 |Y|2|
 
 ```
+
 ## Output
+
 Here's the output that contains the subnet ID's with their network address.
 
 $ ./vlsmc.sh -n 165.23.208.0/20 -l A,250:B,700:C,500:D,100:X,2:Y,2
