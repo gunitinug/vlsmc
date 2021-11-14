@@ -76,6 +76,7 @@ Here's the command:
 This sets the starting network block to 192.168.10.0/24 and the list of required subnets as:
 
 |Subnet ID|Required host size|
+|---|---|
 |KL|28|
 |Perth|60|
 |Sydney|12|
