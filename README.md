@@ -28,6 +28,10 @@ Usage: vlsmc [ -n NETWORK ] [ -l [ ID,SIZE[:ID,SIZE]... ] ]
 Example
 vlsmc -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sydney-KL,2:Sinpapore-KL,2'
 ```
+-n sets the starting network block.
+
+-l sets the list of required ID,SIZE pairs where ID. Each pair is separated by :.
+
 # Demo
 
 ## First example
