@@ -23,6 +23,11 @@ This script is, of course, to be run inside bash. You also need bc and jq.
 
 If you could help me fixing errors and to improve speed you are welcome.
 
+For example, the following hangs.
+```
+$ vlsmc.sh -n 10.0.0.0/8 -l LAN1,80:LAN2,20:LAN3,350:LAN4,250:LAN5,50:WAN1,2:WAN2,2:WAN3,2:WAN4,2:WAN5,2:WAN6,2
+```
+
 # Disclaimer
 This project is for learning purposes only. It should not be used for a serious usage. But I am committed to improving/fixing issues that remain.
 
