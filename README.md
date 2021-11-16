@@ -3,6 +3,9 @@ A VLSM Calculator
 
 This is a VLSM calculator implemented in Bash.
 
+# Notes
+Requires jq.
+
 # VLSM process
 
 ![](https://github.com/gunitinug/vlsmc/blob/main/vlsm%20diagram.png?raw=true)
