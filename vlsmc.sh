@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # VLSMC -- A VLSM Calculator
-# v-release-01
+# v-release-02
 # Written by Logan Won-Ki Lee
+# Uses code from TJ -- thanks a lot, man!
 # November 2021
 
 # we start with these...
@@ -196,7 +197,7 @@ quad2unsigned() { # quad2unsigned(string ipv4_dotted_decimal) => unsigned
   octet="${quad%%.*}"
   quad="${quad#*.}"
   address=$((2 ** pow * octet + address))
-  $debug && echo "quad2unsigned(): $pow $((2 ** pow)) $((2 ** pow * octet)) $address" >&2
+  #$debug && echo "quad2unsigned(): $pow $((2 ** pow)) $((2 ** pow * octet)) $address" >&2
  done
  printf "%d" $address
 }
