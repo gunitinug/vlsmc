@@ -162,3 +162,24 @@ LAN2                : 172.168.3.0/26      : 50 hosts
 WAN2                : 172.168.3.64/30     : 2 hosts        
 WAN1                : 172.168.3.68/30     : 2 hosts  
 ```
+
+## Fifth example
+`$ ./vlsmc.sh -n 10.0.0.0/8 -l LAN1,80:LAN2,20:LAN3,350:LAN4,250:LAN5,50:WAN1,2:WAN2,2:WAN3,2:WAN4,2:WAN5,2:WAN6,2`
+
+Output is:
+```
+starting network
+10.0.0.0/8
+
+LAN3                : 10.0.0.0/23         : 350 hosts      
+LAN4                : 10.0.2.0/24         : 250 hosts      
+LAN1                : 10.0.3.0/25         : 80 hosts       
+LAN5                : 10.0.3.128/26       : 50 hosts       
+LAN2                : 10.0.3.192/27       : 20 hosts       
+WAN6                : 10.0.3.224/30       : 2 hosts        
+WAN5                : 10.0.3.228/30       : 2 hosts        
+WAN4                : 10.0.3.232/30       : 2 hosts        
+WAN3                : 10.0.3.236/30       : 2 hosts        
+WAN2                : 10.0.3.240/30       : 2 hosts        
+WAN1                : 10.0.3.244/30       : 2 hosts  
+```
