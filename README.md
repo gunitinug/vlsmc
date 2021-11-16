@@ -164,7 +164,7 @@ WAN1                : 172.168.3.68/30     : 2 hosts
 ```
 
 ## Fifth example
-`$ ./vlsmc.sh -n 10.0.0.0/8 -l LAN1,80:LAN2,20:LAN3,350:LAN4,250:LAN5,50:WAN1,2:WAN2,2:WAN3,2:WAN4,2:WAN5,2:WAN6,2`
+`$ vlsmc.sh -n 10.0.0.0/8 -l LAN1,80:LAN2,20:LAN3,350:LAN4,250:LAN5,50:WAN1,2:WAN2,2:WAN3,2:WAN4,2:WAN5,2:WAN6,2`
 
 Output is:
 ```
