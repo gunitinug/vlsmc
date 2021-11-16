@@ -57,12 +57,6 @@ Here's the output that contains the subnet ID's with their network address.
 
 ```
 $ ./vlsmc.sh -n 165.23.208.0/20 -l A,250:B,700:C,500:D,100:X,2:Y,2
-might take a few seconds...
-IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
-This is a learning project and not for professional use!
-This project uses my own algorithm which is not as efficient.
-Be patient!
-
 starting network
 165.23.208.0/20
 
@@ -95,12 +89,6 @@ And here's the output:
 
 ```
 $ ./vlsmc.sh -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sydney-KL,2:Sinpapore-KL,2'
-might take a few seconds...
-IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
-This is a learning project and not for professional use!
-This project uses my own algorithm which is not as efficient.
-Be patient!
-
 starting network
 192.168.10.0/24
 
@@ -133,12 +121,6 @@ Here's the output:
 
 ```
 $ ./vlsmc.sh -n 192.168.1.0/24 -l LAN1,29:LAN2,21:LAN3,12:LAN4,8:WAN1,2:WAN2,2:WAN3,2:WAN4,2
-might take a few seconds...
-IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
-This is a learning project and not for professional use!
-This project uses my own algorithm which is not as efficient.
-Be patient!
-
 starting network
 192.168.1.0/24
 
@@ -170,12 +152,6 @@ And the output is:
 
 ```
 $ ./vlsmc.sh -n 172.168.0.0/16 -l VLAN1,240:VLAN2,200:LAN1,150:LAN2,50:WAN1,2:WAN2,2
-might take a few seconds...
-IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
-This is a learning project and not for professional use!
-This project uses my own algorithm which is not as efficient.
-Be patient!
-
 starting network
 172.168.0.0/16
 
