@@ -3,9 +3,7 @@ A VLSM Calculator
 
 This is a VLSM calculator implemented in Bash.
 
-# Algorithm used
-
-I have devised an algorithm to implement this tool. Here's a diagram of the overall process:
+# VLSM process
 
 ![](https://github.com/gunitinug/vlsmc/blob/main/vlsm%20diagram.png?raw=true)
 
@@ -15,43 +13,6 @@ Definitions:
 - FULL: if all subnets in current block are committed 
 - if ITEM: there is a subnet that remains to be committed
 - DIVIDED: if a sub block is created at current index
-
-# Notes
-For a small CIDR like between 8 and 15, the script takes ages to produce output or hangs altogether. This is because of the efficiency of the algorithm used. Perhaps using bash to do this job is not suitable. Interacting with bash script and jq is relatively slow.
-
-This script is, of course, to be run inside bash. You also need bc and jq.
-
-If you could help me fixing errors and to improve speed you are welcome.
-
-For example, the following hangs.
-```
-$ vlsmc.sh -n 10.0.0.0/8 -l LAN1,80:LAN2,20:LAN3,350:LAN4,250:LAN5,50:WAN1,2:WAN2,2:WAN3,2:WAN4,2:WAN5,2:WAN6,2
-```
-but this one works:
-```
-$ ./vlsmc.sh -n 10.0.0.0/16 -l LAN1,80:LAN2,20:LAN3,350:LAN4,250:LAN5,50:WAN1,2:WAN2,2:WAN3,2:WAN4,2:WAN5,2:WAN6,2
-might take a few seconds...
-IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
-This is a learning project and not for professional use!
-This project uses my own algorithm which is not as efficient.
-Be patient!
-
-starting network
-10.0.0.0/16
-
-LAN3                : 10.0.0.0/23         : 350 hosts      
-LAN4                : 10.0.2.0/24         : 250 hosts      
-LAN1                : 10.0.3.0/25         : 80 hosts       
-LAN5                : 10.0.3.128/26       : 50 hosts       
-LAN2                : 10.0.3.192/27       : 20 hosts       
-WAN6                : 10.0.3.224/30       : 2 hosts        
-WAN5                : 10.0.3.228/30       : 2 hosts        
-WAN4                : 10.0.3.232/30       : 2 hosts        
-WAN3                : 10.0.3.236/30       : 2 hosts        
-WAN2                : 10.0.3.240/30       : 2 hosts        
-WAN1                : 10.0.3.244/30       : 2 hosts 
-```
-The subnets are identical to those of 10.0.0.0/8.
 
 # Disclaimer
 This project is for learning purposes only. It should not be used for a serious usage. But I am committed to improving/fixing issues that remain.
