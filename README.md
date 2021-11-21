@@ -6,17 +6,6 @@ This is a VLSM calculator implemented in Bash.
 # Notes
 Requires jq.
 
-# VLSM process
-
-![](https://github.com/gunitinug/vlsmc/blob/main/vlsm%20diagram.png?raw=true)
-
-[I explain it more in the video](https://youtu.be/LJdqb05PZOE)
-
-Definitions:
-- FULL: if all subnets in current block are committed 
-- if ITEM: there is a subnet that remains to be committed
-- DIVIDED: if a sub block is created at current index
-
 # Disclaimer
 This project is for learning purposes only. It should not be used for a serious usage. But I am committed to improving/fixing issues that remain.
 
