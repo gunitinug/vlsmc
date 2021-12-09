@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # VLSMC -- A VLSM Calculator
-# v-release-02
+# v-release-03
 # Written by Logan Won-Ki Lee
 # Uses code from TJ -- thanks a lot, man!
-# November 2021
+# November 2021, December 2021
 
 # we start with these...
 
@@ -13,9 +13,6 @@
 ARG_NET=
 ARG_LIST=
 ARG_LIST_ARRAY=
-
-# validate arg list
-# ^([a-z|A-Z]+,[0-9]+:*)+$
 
 usage () {
 	echo "VLSMC -- A VLSM Calculator"
@@ -84,22 +81,11 @@ then
   exit_abnormal
 fi
 
-# test that we got -n and -l arg values
-#echo network is "$ARG_NET"
-#echo subnet list is "$ARG_LIST"
-
 # convert ARG_LIST to array so we can loop through it
-# and ad id,size pairs to JSON object.
+# each item is id,size pair
 ARG_LIST_ARRAY=($(echo $ARG_LIST | tr ':' ' '))
-#echo arg list array is
-#echo "${ARG_LIST_ARRAY[@]}"
-#echo first item
-#echo "${ARG_LIST_ARRAY[0]}"
-#echo second item
-#echo "${ARG_LIST_ARRAY[1]}"
 
-
-#starting_network="192.168.10.0/24"		# this comes from the user's arg
+#starting_network -- this comes from the user's arg
 starting_network="$ARG_NET"
 
 # every .size and .id come from the user's arg
@@ -107,13 +93,6 @@ LIST_START=$(cat << EOF
 []
 EOF
 )
-
-# might take a few seconds message
-#echo might take a few seconds...
-#echo IT MIGHT TAKE UP TO A MINUTE FOR THE RESULT TO COME UP!
-#echo This is a learning project and not for professional use!
-#echo This project uses my own algorithm which is not as efficient.
-#echo Be patient!
 
 #####################
 # populate LIST_START
@@ -129,44 +108,21 @@ do
 	LIST_START=$(jq --arg START_ITEM_ID "$__id__" --arg START_ITEM_SIZE "$__size__" '.+=[{id:$START_ITEM_ID, size:$START_ITEM_SIZE}]' <<< "$LIST_START")
 done
 
-# test
-#echo updated LIST START
-#echo "$LIST_START"
-
-# PREVENT RUNNING FOR NOW
-# UNTIL TESTING IS DONE.
-#exit 0
-
 # reverse sort by .size
 LIST_START=$(jq '.|sort_by(.size|tonumber)|reverse' <<< "$LIST_START")
-#echo reversed list start "$LIST_START"
+
 # extract just the .id's and put them in an array
 LIST_START_IDS=($(jq -r '.[]|.id' <<< "$LIST_START" | tr '\n' ' '))		# compare this with OCCUPIED_SUBNETS at the end of this script.
 # extract just the .size's and put them in an array
 LIST_START_SIZES=($(jq -r '.[]|.size' <<< "$LIST_START" | tr '\n' ' '))
 
-# debug
-#echo list start ids "${LIST_START_IDS[@]}"
-#echo list start sizes "${LIST_START_SIZES[@]}"
-#exit
-
-
-#echo "${LIST_START_IDS[@]}"	# Perth KL Singapore Sydney Singapore-KL Sydney-KL Perth-KL
-#echo "${LIST_START_IDS[0]}"	# Perth
-#echo "${LIST_START_IDS[1]}"	# KL
-#echo required sizes
-#echo "${LIST_START_SIZES[@]}"	# 60 28 12 12 2 2 2
-# let's convert required_hosts_sizes_plus_two to required_items.
-#declare -i required_hosts_sizes=(12 12 28 60 2 2 2)		# this is what we get from user passing arguments.
-
-# test other inputs
-#declare -i required_hosts_sizes=(250 700 500 2 2 100)
+# get array of required host size + 2
+# since each subnet needs to reserve two ip's for
+# network addr and broadcast addr.
 declare -i required_hosts_sizes=("${LIST_START_SIZES[@]}")
-
 declare -i required_hosts_sizes_plus_two=("${required_hosts_sizes[@]/%/+2}")
 
 get_required_items () {
-	#echo required hosts sizes plus two ${required_hosts_sizes_plus_two[@]}
 	local required_items_not_sorted=()
 	for s in "${required_hosts_sizes_plus_two[@]}"
 	do
@@ -174,14 +130,14 @@ get_required_items () {
 		local subnet=1
 		
 		while [ $subnet -lt $hosts_plus_two ]; do
-		subnet=$(($subnet*2))
+		    subnet=$(($subnet*2))
 		done	
 	
 		required_items_not_sorted+=($subnet)
 	done
 	# now sort required_items_not_sorted
+	# this sorts array of required subnet size in descending order.
 	required_items=($(echo "${required_items_not_sorted[@]}" | tr ' ' '\n' | sort -rn | tr '\n' ' '))
-	#echo required items "${required_items[@]}"
 }
 
 # get required items array
@@ -284,13 +240,21 @@ echo starting network
 echo "$starting_network"
 echo
 
-###########################################
-# print occupied subnets' id, name and size
-###########################################
+# get main_prefix from ARG_NET
+main_prefix=${ARG_NET#*/}
+range_remaining=$(prefix2range $main_prefix)
+too_large_marker=
 
 for (( i=0; i<${#LIST_START_IDS[@]}; i++ ))
 do
+        # test if there is still room for allocating a subnet
+        net_size=$(prefix2range ${LIST_END_CIDRS[$i]})
+        [[ $range_remaining -lt $net_size ]] && too_large_marker=" full"
+
 	# try fixed column sizes
-	printf '%-20s: %-20s: %-15s\n' "${LIST_START_IDS[$i]}" "${LIST_END_BASES[$i]}/${LIST_END_CIDRS[$i]}" "${LIST_START_SIZES[$i]} hosts"
+	printf '%-20s: %-20s: %-15s %-5s\n' "${LIST_START_IDS[$i]}" "${LIST_END_BASES[$i]}/${LIST_END_CIDRS[$i]}" "${LIST_START_SIZES[$i]} hosts" "$too_large_marker"
+
+	# update range remaining after allocating net_size
+	range_remaining=$((range_remaining-net_size))
 done
 
