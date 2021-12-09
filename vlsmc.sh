@@ -1,12 +1,61 @@
 #!/bin/bash
 
 # VLSMC -- A VLSM Calculator
-# v-release-03
+# v-release-04
 # Written by Logan Won-Ki Lee
 # Uses code from TJ -- thanks a lot, man!
 # November 2021, December 2021
 
-# we start with these...
+# TJ's work
+# convert IPv4 dotted decimal string to unsigned integer (32-bit)
+quad2unsigned() { # quad2unsigned(string ipv4_dotted_decimal) => unsigned
+ local quad="$1"
+ local octet
+ local -i address=0
+ for pow in 24 16 8 0; do
+  octet="${quad%%.*}"
+  quad="${quad#*.}"
+  address=$((2 ** pow * octet + address))
+  #$debug && echo "quad2unsigned(): $pow $((2 ** pow)) $((2 ** pow * octet)) $address" >&2
+ done
+ printf "%d" $address
+}
+
+# convert 32-bit unsigned integer to IPv4 dotted decimal string
+unsigned2quad() { # unsigned2quad(unsigned ipv4) => string
+ local -i remains=$1
+ local octet
+ local dotted=""
+ for pow in 24 16 8 0; do
+  octet=$(( remains  >> pow ))
+  dotted="${dotted}${octet}."
+  remains=$(( remains - ( octet << pow )  ))
+ done
+ printf "%s" "${dotted%.*}"
+}
+
+# calculate network from an arbitrary address and prefix
+unsigned2network() { # unsigned2network(unsigned address, unsigned prefix) => unsigned
+ local -i addr="$1"
+ local -i prefix="$2"
+ printf "%d" $(( (addr >> ( 32 - prefix) << (32 - prefix) ) ))
+}
+
+# convert a network /prefix to the number of addresses it contains
+prefix2range() { # prefix2range(unsigned prefix) => unsigned
+ printf "%d" $(( 2 ** (32 - $1) ))
+}
+
+# convert a range (quantity of addresses) to the best-fit prefix
+range2prefix() { # range2prefix(unsigned range) => unsigned
+ local -i prefix=0
+ while [[ $((2**prefix)) -lt $1 ]] && [[ $prefix -le 32 ]]; do
+  prefix=$((prefix + 1))
+ done
+ printf "%d" $((32 - prefix))
+}
+# end TJ's work
+
 
 # parse command line args and populate ARG_NET and ARG_LIST
 
@@ -85,8 +134,14 @@ fi
 # each item is id,size pair
 ARG_LIST_ARRAY=($(echo $ARG_LIST | tr ':' ' '))
 
-#starting_network -- this comes from the user's arg
-starting_network="$ARG_NET"
+# starting_network -- this comes from the user's arg
+# then it is converted to network address just in case
+# user given one is not.
+starting_network_base=${ARG_NET%%/*}
+starting_network_base_unsigned=$(quad2unsigned $starting_network_base)
+starting_network_prefix=${ARG_NET##*/}
+starting_network_unsigned=$(unsigned2network $starting_network_base_unsigned $starting_network_prefix)
+starting_network=$(unsigned2quad $starting_network_unsigned)
 
 # every .size and .id come from the user's arg
 LIST_START=$(cat << EOF
@@ -143,55 +198,6 @@ get_required_items () {
 # get required items array
 get_required_items
 
-# TJ's work
-# convert IPv4 dotted decimal string to unsigned integer (32-bit)
-quad2unsigned() { # quad2unsigned(string ipv4_dotted_decimal) => unsigned
- local quad="$1"
- local octet
- local -i address=0
- for pow in 24 16 8 0; do
-  octet="${quad%%.*}"
-  quad="${quad#*.}"
-  address=$((2 ** pow * octet + address))
-  #$debug && echo "quad2unsigned(): $pow $((2 ** pow)) $((2 ** pow * octet)) $address" >&2
- done
- printf "%d" $address
-}
-
-# convert 32-bit unsigned integer to IPv4 dotted decimal string
-unsigned2quad() { # unsigned2quad(unsigned ipv4) => string
- local -i remains=$1
- local octet
- local dotted=""
- for pow in 24 16 8 0; do
-  octet=$(( remains  >> pow ))
-  dotted="${dotted}${octet}."
-  remains=$(( remains - ( octet << pow )  ))
- done
- printf "%s" "${dotted%.*}"
-}
-
-# calculate network from an arbitrary address and prefix
-unsigned2network() { # unsigned2network(unsigned address, unsigned prefix) => unsigned
- local -i addr="$1"
- local -i prefix="$2"
- printf "%d" $(( (addr >> ( 32 - prefix) << (32 - prefix) ) ))
-}
-
-# convert a network /prefix to the number of addresses it contains
-prefix2range() { # prefix2range(unsigned prefix) => unsigned
- printf "%d" $(( 2 ** (32 - $1) ))
-}
-
-# convert a range (quantity of addresses) to the best-fit prefix
-range2prefix() { # range2prefix(unsigned range) => unsigned
- local -i prefix=0
- while [[ $((2**prefix)) -lt $1 ]] && [[ $prefix -le 32 ]]; do
-  prefix=$((prefix + 1))
- done
- printf "%d" $((32 - prefix))
-}
-# end TJ's work
 
 LIST_END_CIDRS=()
 
@@ -237,7 +243,7 @@ done
 #############
 echo
 echo starting network
-echo "$starting_network"
+echo "${starting_network}/${starting_network_prefix}"
 echo
 
 # get main_prefix from ARG_NET
