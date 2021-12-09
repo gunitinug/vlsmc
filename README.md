@@ -34,6 +34,24 @@ vlsmc -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sy
 
 [See it in action here](https://www.youtube.com/watch?v=tte1yNb9ZrQ)
 
+## What if there are more subnets to allocate but we ran out of space?
+
+Here, subnets C,D,E can't be allocated because we run out of space in 192.168.0.0/24.
+
+```
+$ ./vlsmc.sh -n 192.168.0.0/24 -l A,100:B,100:C,50:D,50:E,10
+
+starting network
+192.168.0.0/24
+
+B                   : 192.168.0.0/25      : 100 hosts            
+A                   : 192.168.0.128/25    : 100 hosts            
+D                   : 192.168.1.0/26      : 50 hosts         full
+C                   : 192.168.1.64/26     : 50 hosts         full
+E                   : 192.168.1.128/28    : 10 hosts         full
+```
+So they are marked as "full" in the output.
+
 ## First example
 `vlsmc.sh -n 165.23.208.0/20 -l A,250:B,700:C,500:D,100:X,2:Y,2`
 
