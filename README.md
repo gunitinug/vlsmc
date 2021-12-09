@@ -34,7 +34,7 @@ vlsmc -n 192.168.10.0/24 -l 'KL,28:Perth,60:Sydney,12:Singapore,12:Perth-KL,2:Sy
 
 [See it in action here](https://www.youtube.com/watch?v=tte1yNb9ZrQ)
 
-## What if there are more subnets to allocate but we ran out of space?
+## What if there are more subnets to allocate but we run out of space?
 
 Here, subnets C,D,E can't be allocated because we run out of space in 192.168.0.0/24.
 
