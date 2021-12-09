@@ -1,2 +1,3 @@
 - track range remaining and quit if item size is larger than range remaining. DONE.
 - check if given network block is network addr. DONE.
+- investigate TJ's maths
